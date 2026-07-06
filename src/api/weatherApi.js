@@ -19,7 +19,7 @@ export class WeatherApiError extends Error {
 export async function getForecast(location, days = 8) {
   if (!API_KEY) {
     throw new WeatherApiError(
-      'Falta la API Key. Crea un archivo .env con VITE_WEATHER_API_KEY=tu_clave',
+      'La API a fallado.',
       0
     );
   }
