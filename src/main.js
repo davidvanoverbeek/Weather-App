@@ -12,7 +12,7 @@ function renderShell() {
   const header = document.createElement('header');
   header.className = 'app-header';
   header.innerHTML = `
-    <h1 class="app-header__title"><span>•</span>WheatherApp<span>•</span></h1>
+    <h1 class="app-header__title"><span>•</span>WeatherApp<span>•</span></h1>
   `;
 
   app.appendChild(header);
