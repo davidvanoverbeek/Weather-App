@@ -1,0 +1,408 @@
+:root {
+  --color-bg: #0b1220;
+  --color-panel: #131b2e;
+  --color-panel-raised: #182338;
+  --color-border: #26314a;
+  --color-text: #f5f7fa;
+  --color-text-muted: #8a93a6;
+  --color-sun: #f2a93b;
+  --color-storm: #4c7ea8;
+  --color-danger: #e2694b;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at 20% -10%, #1a2740 0%, var(--color-bg) 55%);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.app-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.app-header__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.app-header__title span {
+  color: var(--color-sun);
+}
+
+/* --- Search bar --- */
+.search-bar {
+  position: relative;
+  margin-bottom: 1.75rem;
+}
+
+.search-bar__form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 0.65rem 0.9rem;
+}
+
+.search-bar__icon {
+  color: var(--color-sun);
+  font-size: 1rem;
+}
+
+.search-bar__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+
+.search-bar__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-bar__geo {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-muted);
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.search-bar__geo:hover {
+  color: var(--color-sun);
+  border-color: var(--color-sun);
+}
+
+.search-bar__geo.is-loading {
+  animation: spin 1s linear infinite;
+}
+
+.search-bar__suggestions {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+  background: var(--color-panel-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.search-bar__suggestion {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.search-bar__suggestion:hover {
+  background: var(--color-panel);
+}
+
+.search-bar__suggestion-region {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* --- Current weather hero --- */
+
+.current-weather {
+  background: linear-gradient(160deg, var(--color-panel) 0%, var(--color-panel-raised) 100%);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.current-weather__skeleton,
+.current-weather__error {
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 2.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+.current-weather__error-title {
+  color: var(--color-danger);
+  font-size: 0.95rem;
+  margin: 0 0 0.4rem;
+}
+
+.current-weather__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.current-weather__place {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.current-weather__country {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0.15rem 0 0;
+}
+
+.current-weather__main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.current-weather__temp {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-sun);
+}
+
+.current-weather__condition {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.current-weather__feels {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin: 0.2rem 0 0;
+}
+
+/* Franja del cielo: la firma visual de la app */
+.sky-strip {
+  margin: 1rem 0 1.4rem;
+}
+
+.sky-strip__track {
+  position: relative;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-border);
+  overflow: visible;
+}
+
+.sky-strip__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-storm), var(--color-sun));
+}
+
+.sky-strip__marker {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-sun);
+  box-shadow: 0 0 0 4px rgba(242, 169, 59, 0.2);
+  transform: translate(-50%, -50%);
+}
+
+.sky-strip__labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 0.4rem;
+}
+
+.readout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem 1rem;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.readout__item dt {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.readout__item dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+/* --- Forecast list --- */
+
+.forecast__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 0.85rem;
+}
+
+.forecast__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.forecast-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 0.75rem 0.4rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.forecast-card:hover {
+  border-color: var(--color-storm);
+}
+
+.forecast-card.is-active {
+  border-color: var(--color-sun);
+  background: var(--color-panel-raised);
+}
+
+.forecast-card__day {
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  color: var(--color-text-muted);
+}
+
+.forecast-card__date {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.forecast-card__rain {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-storm);
+}
+
+.forecast-card__temps {
+  display: flex;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.forecast-card__min {
+  color: var(--color-text-muted);
+}
+
+/* --- Day detail panel --- */
+
+.day-detail {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+}
+
+.day-detail__title {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.day-detail__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem 0.8rem;
+}
+
+.day-detail__grid dt {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.day-detail__grid dd {
+  margin: 0.1rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-bar__geo.is-loading {
+    animation: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .current-weather__temp {
+    font-size: 3.6rem;
+  }
+  .readout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .day-detail__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
